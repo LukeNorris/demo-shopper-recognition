@@ -31,7 +31,7 @@ const registerShopper = asyncHandler(async (shopperReference, amount ) => {
 
 
 const updateShopper = asyncHandler(async (shopperReference, amount) => {
-  const shopper = await Shopper.findOne({ rdr })
+  const shopper = await Shopper.findOne({ shopperReference })
   if(!shopper){
     registerShopper(shopperReference, amount)
   }
