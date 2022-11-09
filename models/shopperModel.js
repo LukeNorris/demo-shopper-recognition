@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const shopperSchema = mongoose.Schema(
   {
-    rdr: {
+    shopperReference: {
       type: String,
       required: true,
     },

@@ -3,15 +3,15 @@ import Shopper from '../models/shopperModel.js'
 
 
 
-const registerShopper = asyncHandler(async (rdr, amount ) => {
-  const shopperExists = await Shopper.findOne({ rdr })
+const registerShopper = asyncHandler(async (shopperReference, amount ) => {
+  const shopperExists = await Shopper.findOne({ shopperReference })
 
   if (shopperExists) {
     return "Shopper exists already"
   }
 
   const shopper = await Shopper.create({
-    rdr: rdr,
+    shopperReference: shopperReference,
     transactionsTotal: amount,
     numberOfPurchases:1
   })
@@ -19,7 +19,7 @@ const registerShopper = asyncHandler(async (rdr, amount ) => {
   if (shopper) {
     return {
       _id: shopper._id,
-      rdr: shopper.rdr,
+      shopperReference: shopper.shopperReference,
       transactionsTotal: shopper.amount,
       numberOfPurchases: shopper.numberOfPurchases
     }
@@ -30,10 +30,10 @@ const registerShopper = asyncHandler(async (rdr, amount ) => {
 
 
 
-const updateShopper = asyncHandler(async (rdr, amount) => {
+const updateShopper = asyncHandler(async (shopperReference, amount) => {
   const shopper = await Shopper.findOne({ rdr })
   if(!shopper){
-    registerShopper(rdr, amount)
+    registerShopper(shopperReference, amount)
   }
   if (shopper) {
     shopper.transactionsTotal = shopper.transactionsTotal + amount
@@ -44,7 +44,7 @@ const updateShopper = asyncHandler(async (rdr, amount) => {
     return {
       _id: updatedShopper._id,
       name: updatedShopper.name,
-      rdr: updatedShopper.rdr,
+      shopperReference: updatedShopper.shopperReference,
       transactionsTotal: updatedShopper.amount,
       numberOfPurchases: updatedShopper.numberOfPurchases
     }
@@ -55,8 +55,8 @@ const updateShopper = asyncHandler(async (rdr, amount) => {
 
 
 
-const getShopperProfile = asyncHandler(async (rdr) => {
-  const shopper = await Shopper.findOne({ rdr:rdr })
+const getShopperProfile = asyncHandler(async (shopperReference) => {
+  const shopper = await Shopper.findOne({ shopperReference:shopperReference })
   if (shopper) {
     return shopper
   } else {
@@ -73,8 +73,8 @@ const getShoppers = asyncHandler(async () => {
 
 
 
-const deleteShopper = asyncHandler(async (rdr) => {
-  const shopper = await Shopper.findOne({ rdr })
+const deleteShopper = asyncHandler(async (shopperReference) => {
+  const shopper = await Shopper.findOne({ shopperReference })
   if (shopper) {
     await shopper.remove()
     return { message: `user ${shopper.name} has removed from the database` }
