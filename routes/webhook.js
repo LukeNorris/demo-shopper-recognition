@@ -1,6 +1,7 @@
 import express from 'express'
 import asyncHandler from 'express-async-handler'
 import Total from '../models/totalModel.js'
+import hmacValidator from '../hmacValidator.js'
 import { updateShopper } from './shopper.js'
 
 
@@ -30,14 +31,14 @@ const addtotal = asyncHandler(async (req, res) => {
       if(response){
         const eventType = req.body?.notificationItems[0]?.NotificationRequestItem?.eventCode
         const success = req.body?.notificationItems[0]?.NotificationRequestItem?.success
-        //const rdr = req.body?.notificationItems[0]?.NotificationRequestItem?.additionalData?.recurring?.recurringDetailReference 
+        const rdr = req.body?.notificationItems[0]?.NotificationRequestItem?.additionalData?.recurring?.recurringDetailReference 
 
         const amount = req.body?.notificationItems[0]?.NotificationRequestItem?.amount?.value / 100 
         if(eventType == "AUTHORISATION" && success == "true" && amount < 21 && amount > 0){
           updateTotal(amount)
-          // if(rdr){
-          //   updateShopper(rdr, amount)
-          // }
+          if(rdr){
+            updateShopper(rdr, amount)
+          }
         }
       }
         
