@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Adyen Total Donated</title>
+        <link rel="stylesheet" href="/style.css">  
+    </head>
+    <body>
+
+        <h1 id="current-total"></h1>
+        <div id="hiddenNum"></div>
+        <p>recogido para la caridad</p>
+        <div id="gif">
+            <img id="imgsrc" src="https://c.tenor.com/wwcY7OhagdsAAAAj/bt21-koya.gif" alt="">
+        </div>
+       
+
+    </body> 
+    <script>
+   
+        setInterval(async() => {
+            const total = await fetch('./api/current-total')
+            .then(
+                function(response) {
+                    if (response.status !== 200) {
+                        console.log('Looks like there was a problem. Status Code: ' +
+                        response.status);
+                        return;
+                    }
+                    response.json().then(function(data) {
+                    let num = parseInt(data["Donated amount"].total.toFixed(2))
+                    let prev = parseInt(document.getElementById("hiddenNum").innerText)
+                   
+                     if(isInRange(prev, num)){
+
+                        //test logic
+                        changingGifs(prev, num)
+                        //....
+
+                        celebrate(true)
+                        setInterval(()=> {
+                            celebrate(false)
+                        }, 10000)
+                     }
+
+                    document.getElementById("hiddenNum").innerText = num
+                    const germanNumber = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(num);
+                    document.getElementById("current-total").innerText = germanNumber
+                    });
+                    
+                }
+            )
+            .catch(function(err) {
+                console.log('Fetch Error :-S', err);
+            });
+        }, 4000); 
+        
+
+    //-----------gif animation--------------
+
+    function celebrate(state){
+        if(state){
+            document.getElementById("gif").style.display = 'block';
+        }
+        else{
+            document.getElementById("gif").style.display = 'none';
+        }
+
+    }
+
+    //Checks if the total has passed one of the array values
+    function isInRange(prev, num) {
+        const numbers = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000]
+        let reachedCelebrateLimit = false
+        numbers.forEach((number) => {
+            if(prev < number && num >= number){
+                reachedCelebrateLimit = true
+            }
+        })
+        return reachedCelebrateLimit
+    }
+
+
+    //test logic below to have a different gif appear for each milestone 
+    function changingGifs(prev, num){
+        let gif = ""
+        if(prev < 1000 && num >= 1000){
+            gif = "https://c.tenor.com/wwcY7OhagdsAAAAj/bt21-koya.gif"
+        } else if(prev < 2000 && num >= 2000){
+            gif = "https://c.tenor.com/YHKdlpTduMQAAAAi/im-free-cute.gif"
+        } else if(prev < 3000 && num >= 3000){
+            gif = "https://c.tenor.com/_nYHwRRlGj0AAAAj/lol-bones.gif"
+        } else if(prev < 4000 && num >= 4000){
+            gif = "https://c.tenor.com/ZoZqWaSnN5UAAAAj/diwali-sparkles-stars.gif"
+        } else if(prev < 5000 && num >= 5000){
+            gif = "https://c.tenor.com/F8uKopL0WXwAAAAj/smiley-emoji.gif"
+        } else if(prev < 6000 && num >= 6000){
+            gif = "https://c.tenor.com/0iMt2783jPcAAAAj/dancing-happy.gif"
+        } else if(prev < 7000 && num >= 7000){
+            gif = "https://c.tenor.com/852LyEGZiD0AAAAj/musica-maracas.gif"
+        } else if(prev < 8000 && num >= 8000){
+            gif = "https://c.tenor.com/PxwQs_YEXHUAAAAj/banana-dance.gif"
+        } else if(prev < 9000 && num >= 9000){
+            gif = "https://c.tenor.com/jyTs_cgA1-8AAAAj/dancing-dancing-gif.gif"
+        } else if(prev < 10000 && num == 10000){
+            gif = "https://c.tenor.com/TLW6ZTXfxQgAAAAj/innovatetoday-dance.gif"
+        } 
+        document.getElementById("imgsrc").src=gif
+    }
+    //.................
+    
+
+    </script> 
+</html>

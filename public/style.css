@@ -1,0 +1,97 @@
+@font-face {
+  font-family: "adyenFont";
+  src: url("Fakt-SemiBold.otf");
+}
+body {
+  background-color: #00112c;
+  background-blend-mode: lighten;
+  text-align: center;
+  padding: 10% 0;
+  z-index: 1;
+}
+h1 {
+  font-family: "adyenFont", Arial, Helvetica, sans-serif;
+  color: #0abf53;
+  font-size: 15vw;
+  margin-top: 3vw;
+  padding-top: 3vw;
+  padding-bottom: 0%;
+  margin-bottom: 0%;
+  z-index: 950;
+}
+p {
+  color: #f3f6f9;
+  font-family: "adyenFont", Arial, Helvetica, sans-serif;
+  font-size: 4vw;
+  padding-top: 0%;
+  margin-top: 2%;
+  padding-bottom: 0%;
+  margin-bottom: 0%;
+  z-index: 950;
+}
+#gif {
+  display : none;
+  /* display : block; */
+
+  color: #00112c;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  padding-top: 0;
+  width: 50%;
+}
+#hiddenNum {
+  display : none;
+}
+.container {
+  display: flex;
+  justify-content: center;
+
+}
+#btn {
+  text-align: center;
+  margin:0 auto;
+  display:block;
+  height: 350px;
+  width: 350px;
+  border-radius: 50%;
+  border-width: 2%;
+  border-color: #f3f6f9;
+  color: #f3f6f9;
+  background-color: #0abf53;  
+  font-size:28px;
+  font-weight:bold;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+#back-btn {
+  text-align: center;
+  margin:0 auto;
+  display:none;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border-width: 2%;
+  border-color: #f3f6f9;
+  color: #f3f6f9;
+  background-color: #0abf53;  
+  font-size:28px;
+  font-weight:bold;
+  cursor: pointer;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+#loading {
+  display: none;
+  font-size: 22px;
+}
+#shopper-info{
+  display:none; 
+  font-size: 20px;
+}
+
+
+
