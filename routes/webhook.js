@@ -27,15 +27,16 @@ const updateTotal = asyncHandler(async (amount) => {
 
 const addtotal = asyncHandler(async (req, res) => {    
     try {
-      //let response = hmacValidator(req)
-      let response = true
+      let response = hmacValidator(req)
+      //let response = true
       if(response){
         const eventType = req.body?.notificationItems[0]?.NotificationRequestItem?.eventCode
         const success = req.body?.notificationItems[0]?.NotificationRequestItem?.success
-        const shopperReference = req.body?.notificationItems[0]?.NotificationRequestItem?.additionalData?.recurring?.shopperReference
-        
+        const shopperReference = req.body?.notificationItems[0]?.NotificationRequestItem?.additionalData ? req.body?.notificationItems[0]?.NotificationRequestItem?.additionalData["recurring.shopperReference"] : null
+        const recurringDetailReference = req.body?.notificationItems[0]?.NotificationRequestItem?.additionalData ? req.body?.notificationItems[0]?.NotificationRequestItem?.additionalData["recurring.recurringDetailReference"] : null
+
         const amount = req.body?.notificationItems[0]?.NotificationRequestItem?.amount?.value / 100 
-        if(eventType == "AUTHORISATION" && success == "true" && amount < 21 && amount > 0){
+        if(eventType == "AUTHORISATION" && success == "true" && amount < 21 && amount > 0 && !recurringDetailReference){
           updateTotal(amount)
           if(shopperReference){
             console.log(shopperReference)
