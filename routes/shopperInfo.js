@@ -80,9 +80,9 @@ const shopperInfo = asyncHandler(async (req, res) => {
         const string = terminalResponse?.SaleToPOIResponse?.PaymentResponse?.Response?.AdditionalResponse?.toString()
         console.log(terminalResponse.SaleToPOIResponse.PaymentResponse.Response.AdditionalResponse.toString())
         const newString = queryStringToJSON(string)
-        const rdr = newString['recurring.recurringDetailReference']
-        console.log(rdr)
-        const profile = await getShopperProfile(rdr)
+        const shopperReference = newString['recurring.shopperReference']
+        console.log(shopperReference)
+        const profile = await getShopperProfile(shopperReference)
         console.log('profile go', profile)
         res.status(200).json(profile)
     } catch (err) {
