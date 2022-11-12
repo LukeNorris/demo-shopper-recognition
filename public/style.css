@@ -19,6 +19,13 @@ h1 {
   margin-bottom: 0%;
   z-index: 950;
 }
+div.fixed {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  color: #f3f6f9;
+}
 p {
   color: #f3f6f9;
   font-family: "adyenFont", Arial, Helvetica, sans-serif;
@@ -29,6 +36,7 @@ p {
   margin-bottom: 0%;
   z-index: 950;
 }
+
 #gif {
   display : none;
   /* display : block; */
@@ -46,8 +54,27 @@ p {
 .container {
   display: flex;
   justify-content: center;
+  flex-direction: row;
 
 }
+#btnn {
+  text-align: center;
+  margin:0 auto;
+  display:block;
+  height: 0px;
+  width: 0px;
+  border-radius: 0%;
+  border-width: 0%;
+  border-color: #00112c;
+  color: #00112c;
+  font-size:28px;
+  font-weight:bold;
+  cursor: pointer;
+  position: absolute;
+  top: 20%;
+  -ms-transform: translateY(-40%);
+  transform: translateY(-50%);
+} 
 #btn {
   text-align: center;
   margin:0 auto;

@@ -6,15 +6,16 @@
         <link rel="stylesheet" href="/style.css">  
     </head>
     <body>
-
         <div class="container">
             <button id="btn" onclick="getshopperReference()">Check my donations<br><br>PRESS HERE!</button>
             <h1 id="loading">Tap your wristband...</h1>
-            <h1 id="shopper-info">Shopper info</h1>   
+            <h1 id="shopper-info">Shopper info</h1>
             <button id="back-btn" onclick="pagerefresh()">Go back</button>
-         
         </div>
+        <div class="fixed">Terminal 1</div>
         
+       
+
     </body> 
     <script>
         const button = document.getElementById("btn")
@@ -25,7 +26,13 @@
         async function getshopperReference() {
             button.style.display = "none";
             loading.style.display = "block";
-            const total = await fetch('./api/shopper-info')
+            const total = await fetch('./api/shopper-info',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({"terminalSerial":"V400m-346510917"}),
+            })
             .then(
                 function(response) {
                     if (response.status !== 200) {

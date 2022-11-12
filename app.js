@@ -33,8 +33,11 @@ const __dirname = path.resolve()
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, '/index.html'));
 });
-app.get('/shopperinfo', function(req, res) {
-  res.sendFile(path.join(__dirname, '/shopperinfo.html'));
+app.get('/shopperinfo-terminal2', function(req, res) {
+  res.sendFile(path.join(__dirname, '/shopperinfo-terminal2.html'));
+});
+app.get('/shopperinfo-terminal1', function(req, res) {
+  res.sendFile(path.join(__dirname, '/shopperinfo-terminal1.html'));
 });
 
 

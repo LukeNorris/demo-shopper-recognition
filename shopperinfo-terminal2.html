@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Adyen Total Donated</title>
+        <link rel="stylesheet" href="/style.css">  
+    </head>
+    <body>
+        <div class="container">
+            <button id="btn" onclick="getshopperReference()">Check my donations<br><br>PRESS HERE!</button>
+            <h1 id="loading">Tap your wristband...</h1>
+            <h1 id="shopper-info">Shopper info</h1>
+            <button id="back-btn" onclick="pagerefresh()">Go back</button>
+        </div>
+        <div class="fixed">Terminal 2</div>
+        
+       
+
+    </body> 
+    <script>
+        const button = document.getElementById("btn")
+        const loading = document.getElementById("loading")
+        const shopperInfo = document.getElementById("shopper-info")
+        const backBtn = document.getElementById("back-btn")
+
+        async function getshopperReference() {
+            button.style.display = "none";
+            loading.style.display = "block";
+            const total = await fetch('./api/shopper-info',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({"terminalSerial":"V400m-346510902"}),
+            })
+            .then(
+                function(response) {
+                    if (response.status !== 200) {
+                        console.log('Looks like there was a problem. Status Code: ' +
+                        response.status);
+                        return;
+                    }
+                    response.json().then(function(data) {
+                    
+                    let name = data?.name || ""
+                    let numberOfPurchases = data?.numberOfPurchases || "many"
+                    let transactionsTotal = data?.transactionsTotal || "many"
+
+                    const text = `Thank you ${name}
+
+                    You made ${numberOfPurchases} purchases at the event! 
+
+                    That's a total of ${transactionsTotal} dollars Adyen will donate to the charity!`
+
+                    loading.style.display = "none";
+                    shopperInfo.innerText = text
+                    shopperInfo.style.display = "block";
+                    backBtn.style.display = "block"
+                    console.log(data)
+                    });
+                }
+            )         
+         }    
+         
+         function pagerefresh() {
+            window.location.reload();
+         }
+    </script> 
+</html>

@@ -23,10 +23,8 @@ const postData = (total = 10.95, serviceId, terminalSerial)=> {
               //"POIID":"S1F2-000158204502794"
               //"POIID":"S1F2-000158215130669"
               //"POIID":"V400cPlus-402023788"
-              "POIID":"V400m-346510917"
-
-
-              //"POIID":terminalSerial    
+              //"POIID":"V400m-346510917"
+              "POIID":terminalSerial           
           },
           "PaymentRequest":{
               "SaleData":{
@@ -59,24 +57,23 @@ const cloudNetworkHeaders = {
     }
   }
 
-const makePaymentCloud = async () => {
+const makePaymentCloud = async (terminalSerial) => {
     let serviceId = Math.floor(Math.random() * Math.floor(10000000)).toString()
 	const response = await axios.post(
         "https://terminal-api-test.adyen.com/sync", 
-        postData(1, serviceId), 
+        postData(1, serviceId, terminalSerial), 
         cloudNetworkHeaders
     )
-  //console.log(response.data.SaleToPOIResponse)
   return response.data
-  //return response.data.SaleToPOIResponse.PaymentResponse
 }
 
 
   
 const shopperInfo = asyncHandler(async (req, res) => {
-    const { totalPrice, serviceId, terminalSerial } = req.body
+    const { terminalSerial } = req.body
+    console.log(terminalSerial)
     try {
-        const terminalResponse = await makePaymentCloud()
+        const terminalResponse = await makePaymentCloud(terminalSerial)
         const string = terminalResponse?.SaleToPOIResponse?.PaymentResponse?.Response?.AdditionalResponse?.toString()
         console.log(terminalResponse.SaleToPOIResponse.PaymentResponse.Response.AdditionalResponse.toString())
         const newString = queryStringToJSON(string)
@@ -92,6 +89,6 @@ const shopperInfo = asyncHandler(async (req, res) => {
   });
 
 
-router.get('/', shopperInfo)
+router.post('/', shopperInfo)
 
 export default router
