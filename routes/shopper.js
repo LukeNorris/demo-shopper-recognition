@@ -4,7 +4,7 @@ import Shopper from '../models/shopperModel.js'
 
 
 // const registerShopper = asyncHandler(async (shopperReference, amount ) => {
-const registerShopper = asyncHandler(async (shopperReference, amount ) => {
+const registerShopper = asyncHandler(async (object ) => {
   const { shopperReference, amount, store } = object
 
   const shopperExists = await Shopper.findOne({ shopperReference })
