@@ -18,6 +18,10 @@ const shopperSchema = mongoose.Schema(
         type: Number,
         required: true,
     },
+    store: {
+      type: String,
+      required: false,
+    },
 
   },
   {

@@ -13,7 +13,8 @@ const registerShopper = asyncHandler(async (shopperReference, amount ) => {
   const shopper = await Shopper.create({
     shopperReference: shopperReference,
     transactionsTotal: amount,
-    numberOfPurchases:1
+    numberOfPurchases:1,
+    store: 1
   })
 
   if (shopper) {
@@ -21,7 +22,8 @@ const registerShopper = asyncHandler(async (shopperReference, amount ) => {
       _id: shopper._id,
       shopperReference: shopper.shopperReference,
       transactionsTotal: shopper.amount,
-      numberOfPurchases: shopper.numberOfPurchases
+      numberOfPurchases: shopper.numberOfPurchases,
+      store: shopper.store
     }
   } else {
     return'Invalid user data and user not created'
@@ -30,7 +32,12 @@ const registerShopper = asyncHandler(async (shopperReference, amount ) => {
 
 
 
-const updateShopper = asyncHandler(async (shopperReference, amount) => {
+//const updateShopper = asyncHandler(async (shopperReference, amount) => {
+const updateShopper = asyncHandler(async (object) => {
+  const { shopperReference, amount, store } = object
+  // console.log('line 34',object)
+  // const { amount, store } = object
+  console.log("amount is:", amount, "and shopperReference is: ", shopperReference )
   const shopper = await Shopper.findOne({ shopperReference })
   if(!shopper){
     registerShopper(shopperReference, amount)
@@ -38,6 +45,8 @@ const updateShopper = asyncHandler(async (shopperReference, amount) => {
   if (shopper) {
     shopper.transactionsTotal = shopper.transactionsTotal + amount
     shopper.numberOfPurchases = shopper.numberOfPurchases + 1
+    shopper.store = shopper.store == store ? shopper.store : store
+
 
     const updatedShopper = await shopper.save()
 
@@ -46,7 +55,8 @@ const updateShopper = asyncHandler(async (shopperReference, amount) => {
       name: updatedShopper.name,
       shopperReference: updatedShopper.shopperReference,
       transactionsTotal: updatedShopper.amount,
-      numberOfPurchases: updatedShopper.numberOfPurchases
+      numberOfPurchases: updatedShopper.numberOfPurchases,
+      store: updatedShopper.store
     }
   } else {
     return 'Shopper not found'
