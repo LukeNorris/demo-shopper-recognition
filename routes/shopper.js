@@ -3,7 +3,10 @@ import Shopper from '../models/shopperModel.js'
 
 
 
+// const registerShopper = asyncHandler(async (shopperReference, amount ) => {
 const registerShopper = asyncHandler(async (shopperReference, amount ) => {
+  const { shopperReference, amount, store } = object
+
   const shopperExists = await Shopper.findOne({ shopperReference })
 
   if (shopperExists) {
@@ -14,7 +17,7 @@ const registerShopper = asyncHandler(async (shopperReference, amount ) => {
     shopperReference: shopperReference,
     transactionsTotal: amount,
     numberOfPurchases:1,
-    store: 1
+    store: store
   })
 
   if (shopper) {
@@ -35,12 +38,9 @@ const registerShopper = asyncHandler(async (shopperReference, amount ) => {
 //const updateShopper = asyncHandler(async (shopperReference, amount) => {
 const updateShopper = asyncHandler(async (object) => {
   const { shopperReference, amount, store } = object
-  // console.log('line 34',object)
-  // const { amount, store } = object
-  console.log("amount is:", amount, "and shopperReference is: ", shopperReference )
   const shopper = await Shopper.findOne({ shopperReference })
   if(!shopper){
-    registerShopper(shopperReference, amount)
+    registerShopper(object)
   }
   if (shopper) {
     shopper.transactionsTotal = shopper.transactionsTotal + amount
