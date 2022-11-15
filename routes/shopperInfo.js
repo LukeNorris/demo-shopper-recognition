@@ -10,7 +10,7 @@ dotenv.config()
 
 const router = express.Router()
 
-const postData = (total = 10.95, serviceId, terminalSerial)=> {
+const postData = (total = 1, serviceId, terminalSerial)=> {
     return {
       "SaleToPOIRequest":{
           "MessageHeader":{
@@ -69,6 +69,26 @@ const makePaymentCloud = async (terminalSerial) => {
 
 
   
+// const shopperInfo = asyncHandler(async (req, res) => {
+//     const { terminalSerial } = req.body
+//     console.log(terminalSerial)
+//     try {
+//         const terminalResponse = await makePaymentCloud(terminalSerial)
+//         const string = terminalResponse?.SaleToPOIResponse?.PaymentResponse?.Response?.AdditionalResponse?.toString()
+//         console.log(terminalResponse.SaleToPOIResponse.PaymentResponse.Response.AdditionalResponse.toString())
+//         const newString = queryStringToJSON(string)
+//         const shopperReference = newString['recurring.shopperReference']
+//         console.log(shopperReference)
+
+//         const profile = await getShopperProfile(shopperReference)
+//         console.log('profile go', profile)
+//         res.status(200).json(profile)
+//     } catch (err) {
+//       console.error(`Error: ${err.message}, error code: ${err.errorCode}`);
+//       res.status(err.statusCode).json(err.message);
+//     }
+//   });
+
 const shopperInfo = asyncHandler(async (req, res) => {
     const { terminalSerial } = req.body
     console.log(terminalSerial)
@@ -79,9 +99,13 @@ const shopperInfo = asyncHandler(async (req, res) => {
         const newString = queryStringToJSON(string)
         const shopperReference = newString['recurring.shopperReference']
         console.log(shopperReference)
+        if(!shopperReference){
+            res.status(200).json({"profile":"not found"})
+        }
         const profile = await getShopperProfile(shopperReference)
         console.log('profile go', profile)
         res.status(200).json(profile)
+
     } catch (err) {
       console.error(`Error: ${err.message}, error code: ${err.errorCode}`);
       res.status(err.statusCode).json(err.message);
