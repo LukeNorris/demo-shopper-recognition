@@ -32,15 +32,14 @@ const addtotal = asyncHandler(async (req, res) => {
       if(response){
         const eventType = req.body?.notificationItems[0]?.NotificationRequestItem?.eventCode
         const success = req.body?.notificationItems[0]?.NotificationRequestItem?.success
-        const store = req.body?.notificationItems[0]?.NotificationRequestItem?.additionalData["store"]
         const shopperReference = req.body?.notificationItems[0]?.NotificationRequestItem?.additionalData ? req.body?.notificationItems[0]?.NotificationRequestItem?.additionalData["recurring.shopperReference"] : null
         const recurringDetailReference = req.body?.notificationItems[0]?.NotificationRequestItem?.additionalData ? req.body?.notificationItems[0]?.NotificationRequestItem?.additionalData["recurring.recurringDetailReference"] : null
         const amount = req.body?.notificationItems[0]?.NotificationRequestItem?.amount?.value / 100 
-        if(eventType == "AUTHORISATION" && success == "true" && amount < 21 && amount > 0 && !recurringDetailReference){
+        if(eventType == "AUTHORISATION" && success == "true" && amount < 21 && amount > 1 && !recurringDetailReference){
           updateTotal(amount)
           if(shopperReference){
             //updateShopper(shopperReference, amount)
-            updateShopper({"shopperReference":shopperReference,"amount": amount, "store": store})
+            updateShopper({"shopperReference":shopperReference,"amount": amount})
           }
         }
       }
@@ -51,26 +50,6 @@ const addtotal = asyncHandler(async (req, res) => {
       res.status(err.statusCode).json(err.message);
     }
 });
-
-
-// const addtotal = asyncHandler(async (req, res) => {   
-//   try {
-//     let response = hmacValidator(req)
-//     if(response){
-//       const eventType = req.body?.notificationItems[0]?.NotificationRequestItem?.eventCode
-//       const success = req.body?.notificationItems[0]?.NotificationRequestItem?.success
-//       const amount = req.body?.notificationItems[0]?.NotificationRequestItem?.amount?.value / 100 
-//       if(eventType == "AUTHORISATION" && success == "true" && amount < 21 && amount > 0){
-//         updateTotal(amount)
-//       }
-//     } 
-//     res.status(200).json(response? "[accepted]" : "Invalid hmac") 
-//   } catch (err) {
-//     console.error(`Error: ${err.message}, error code: ${err.errorCode}`);
-//     res.status(err.statusCode).json(err.message);
-//   }
-// });
-
 
 
 

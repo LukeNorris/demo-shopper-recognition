@@ -4,8 +4,8 @@ import Shopper from '../models/shopperModel.js'
 
 
 // const registerShopper = asyncHandler(async (shopperReference, amount ) => {
-const registerShopper = asyncHandler(async (object ) => {
-  const { shopperReference, amount, store } = object
+const registerShopper = asyncHandler(async (object) => {
+  const { shopperReference, amount } = object
 
   const shopperExists = await Shopper.findOne({ shopperReference })
 
@@ -17,7 +17,6 @@ const registerShopper = asyncHandler(async (object ) => {
     shopperReference: shopperReference,
     transactionsTotal: amount,
     numberOfPurchases:1,
-    store: store
   })
 
   if (shopper) {
@@ -26,7 +25,6 @@ const registerShopper = asyncHandler(async (object ) => {
       shopperReference: shopper.shopperReference,
       transactionsTotal: shopper.amount,
       numberOfPurchases: shopper.numberOfPurchases,
-      store: shopper.store
     }
   } else {
     return'Invalid user data and user not created'
@@ -37,7 +35,7 @@ const registerShopper = asyncHandler(async (object ) => {
 
 //const updateShopper = asyncHandler(async (shopperReference, amount) => {
 const updateShopper = asyncHandler(async (object) => {
-  const { shopperReference, amount, store } = object
+  const { shopperReference, amount } = object
   const shopper = await Shopper.findOne({ shopperReference })
   if(!shopper){
     registerShopper(object)
@@ -45,7 +43,6 @@ const updateShopper = asyncHandler(async (object) => {
   if (shopper) {
     shopper.transactionsTotal = shopper.transactionsTotal + amount
     shopper.numberOfPurchases = shopper.numberOfPurchases + 1
-    shopper.store = shopper.store == store ? shopper.store : store
 
 
     const updatedShopper = await shopper.save()
@@ -56,7 +53,6 @@ const updateShopper = asyncHandler(async (object) => {
       shopperReference: updatedShopper.shopperReference,
       transactionsTotal: updatedShopper.amount,
       numberOfPurchases: updatedShopper.numberOfPurchases,
-      store: updatedShopper.store
     }
   } else {
     return 'Shopper not found'
