@@ -7,12 +7,11 @@
     </head>
     <body>
         <div class="container">
-            <button id="btn" onclick="getshopperReference()">Check my donations<br><br>PRESS HERE!</button>
-            <button id="back-btn" onclick="pagerefresh()" style="display: none;">Go back</button>
-            <h1 id="loading">Tap your wristband...</h1>
-            <button id="refresh-btn" onclick="getshopperReference()">refresh</button>
+            <button id="btn" onclick="getshopperReference()">Vérifiez mes dons<br><br>CLIQUEZ ICI!</button>
+            <button id="back-btn" onclick="pagerefresh()" style="display: none;">Retour</button>
+            <h1 id="loading">Scannez votre bracelet sur le terminal de paiment...</h1>
             <h1 id="shopper-info"></h1>
-            <button id="home-screen-btn" onclick="pagerefresh()">Home screen</button>
+            <button id="home-screen-btn" onclick="pagerefresh()">Écran d'accueil</button>
         </div>
         <div class="fixed">Terminal 2</div>
         
@@ -54,14 +53,15 @@
                     
                     let text;
                     if(numberOfPurchases){
-                        text = `Thank you
+                        text = `Merci
 
-                        You made ${numberOfPurchases} purchases at the event! 
+                        Vous avez effectué ${numberOfPurchases} achats lors de l'événement !
 
-                        That's a total of ${transactionsTotal} dollars Adyen will donate to the charity!`
+                        C'est un total de ${transactionsTotal} euros qu'Adyen reversera à l'association !`
                     } else {
-                        text = `Sorry I'm having trouble reading your wristband. 
-                        Please try a different one, or press cancel on the terminal`
+                        text = `Désolé, je n'arrive pas à lire votre bracelet.
+                        Veuillez en essayer un autre, 
+                        ou appuyez sur la touche pour annuler sur le terminal.`
                     }
 
                     loading.style.display = "none";

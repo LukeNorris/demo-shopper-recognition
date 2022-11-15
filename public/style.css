@@ -67,9 +67,15 @@ p {
 }
 #back-btn{
   display: none;
+  background-color: #0abf53;;
+  color: #f3f6f9;
+  border-radius: 20%;
+  font-family: "adyenFont", Arial, Helvetica, sans-serif; 
+  font-size: larger;
 }
-#refresh-btn{
-  display: none;
+#back-btn:hover {
+  background-color: #f3f6f9;
+  color: #00112c;
 }
 
 #btn {
@@ -90,6 +96,10 @@ p {
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+}
+#btn:hover {
+  background-color: #f3f6f9;
+  color: #00112c;
 }
 #home-screen-btn {
   text-align: center;
@@ -112,6 +122,8 @@ p {
 }
 #shopper-info{
   display:none; 
+  margin-top: 0%;
+  padding-top: 0;
   font-size: 28px;
 }
 
