@@ -8,9 +8,11 @@
     <body>
         <div class="container">
             <button id="btn" onclick="getshopperReference()">Check my donations<br><br>PRESS HERE!</button>
+            <button id="back-btn" onclick="pagerefresh()" style="display: none;">Go back</button>
             <h1 id="loading">Tap your wristband...</h1>
-            <h1 id="shopper-info">Shopper info</h1>
-            <button id="back-btn" onclick="pagerefresh()">Go back</button>
+            <button id="refresh-btn" onclick="getshopperReference()">refresh</button>
+            <h1 id="shopper-info"></h1>
+            <button id="home-screen-btn" onclick="pagerefresh()">Home screen</button>
         </div>
         <div class="fixed">Terminal 2</div>
         
@@ -21,11 +23,16 @@
         const button = document.getElementById("btn")
         const loading = document.getElementById("loading")
         const shopperInfo = document.getElementById("shopper-info")
+        const homeBtn = document.getElementById("home-screen-btn")
         const backBtn = document.getElementById("back-btn")
+
 
         async function getshopperReference() {
             button.style.display = "none";
+            backBtn.style.display = "block";
+            homeBtn.style.display = "none";
             loading.style.display = "block";
+
             const total = await fetch('./api/shopper-info',{
                 method: 'POST',
                 headers: {
@@ -42,20 +49,25 @@
                     }
                     response.json().then(function(data) {
                     
-                    let name = data?.name || ""
-                    let numberOfPurchases = data?.numberOfPurchases || "many"
-                    let transactionsTotal = data?.transactionsTotal || "many"
+                    let numberOfPurchases = data?.numberOfPurchases || null
+                    let transactionsTotal = data?.transactionsTotal || null
+                    
+                    let text;
+                    if(numberOfPurchases){
+                        text = `Thank you
 
-                    const text = `Thank you ${name}
+                        You made ${numberOfPurchases} purchases at the event! 
 
-                    You made ${numberOfPurchases} purchases at the event! 
-
-                    That's a total of ${transactionsTotal} dollars Adyen will donate to the charity!`
+                        That's a total of ${transactionsTotal} dollars Adyen will donate to the charity!`
+                    } else {
+                        text = `Sorry I'm having rouble reading your wristband, please try a different one`
+                    }
 
                     loading.style.display = "none";
                     shopperInfo.innerText = text
                     shopperInfo.style.display = "block";
-                    backBtn.style.display = "block"
+                    homeBtn.style.display = "block"
+                    backBtn.style.display = "none"
                     console.log(data)
                     });
                 }
