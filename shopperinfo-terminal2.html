@@ -7,17 +7,15 @@
     </head>
     <body>
         <div class="container">
-            <button id="btn" onclick="getshopperReference()">Vérifiez mes dons<br><br>CLIQUEZ ICI!</button>
+            <button id="btn" onclick="getshopperReference()">Votre contribution s'elévè à...<br><br>Cliquez ici!</button>
             <button id="back-btn" onclick="pagerefresh()" style="display: none;">Retour</button>
-            <h1 id="loading">Scannez votre bracelet sur le terminal de paiment...</h1>
+            <h1 id="loading">Scannez votre bracelet sur le terminal...</h1>
             <h1 id="shopper-info"></h1>
             <button id="home-screen-btn" onclick="pagerefresh()">Écran d'accueil</button>
         </div>
         <div class="fixed">Terminal 2</div>
-        
-       
-
     </body> 
+
     <script>
         const button = document.getElementById("btn")
         const loading = document.getElementById("loading")
@@ -37,7 +35,7 @@
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({"terminalSerial":"V400m-346510902"}),
+                body: JSON.stringify({"terminalSerial":"V400m-347336379"}),
             })
             .then(
                 function(response) {
@@ -53,7 +51,7 @@
                     
                     let text;
                     if(numberOfPurchases){
-                        text = `Merci
+                        text = `Merci !
 
                         Vous avez effectué ${numberOfPurchases} achats lors de l'événement !
 
@@ -69,7 +67,6 @@
                     shopperInfo.style.display = "block";
                     homeBtn.style.display = "block"
                     backBtn.style.display = "none"
-                    console.log(data)
                     });
                 }
             )         

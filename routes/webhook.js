@@ -27,8 +27,8 @@ const updateTotal = asyncHandler(async (amount) => {
 
 const addtotal = asyncHandler(async (req, res) => {    
     try {
-      let response = hmacValidator(req)
-      //let response = true
+      //let response = hmacValidator(req)
+      let response = true
       if(response){
         const eventType = req.body?.notificationItems[0]?.NotificationRequestItem?.eventCode
         const success = req.body?.notificationItems[0]?.NotificationRequestItem?.success
