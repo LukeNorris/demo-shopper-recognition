@@ -25,7 +25,7 @@
 
         <h1 id="current-total"></h1>
 
-        <p>collectés pour l'association NOC!</p>
+        <p>collectés pour l'association NOC !</p>
         <!-- <img src="images/Logo_NOC_cmjn copie.png" /> -->
   
         <!-- <img src="images/NOC-logo.jpg" /> -->
@@ -90,126 +90,6 @@
                 return prev < number && num >= number
             })
         }
-
-
-    //     setInterval(async() => {
-    //         const total = await fetch('./api/current-total')
-    //         .then(
-    //             function(response) {
-    //                 if (response.status !== 200) {
-    //                     console.log('Looks like there was a problem. Status Code: ' +
-    //                     response.status);
-    //                     return;
-    //                 }
-    //                 response.json().then(function(data) {
-    //                     let num = parseInt(data["Donated amount"].total.toFixed(2))
-    //                     let prev = parseInt(document.getElementById("hiddenNum").innerText)
-    //                     document.getElementById("hiddenNum").innerText = num
-    //                     const germanNumber = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(num);
-    //                     document.getElementById("current-total").innerText = germanNumber
-
-    //                     // if(isInRange(prev, num)){
-
-    //                     //     //test logic
-    //                     //     changingGifs(prev, num)
-    //                     //     //....
-
-    //                     //     celebrate(true)
-    //                     //     setInterval(()=> {
-    //                     //         celebrate(false)
-    //                     //     }, 10000)
-    //                     // }
-    //                     if(isInRange(prev, num)) {
-    //                         myGreeting(true)
-    //                         setInterval(()=> {
-    //                             myGreeting(false)
-    //                         }, 7000)
-    //                     } else if (num == 10000) {
-    //                         document.getElementById("current-total").classList.add('celebrate');
-    //                         var confettis = document.getElementsByClassName("confetti-piece");
-    //                         for (const confetti of confettis) {
-    //                             confetti.classList.add('celebrate');
-    //                         }
-    //                     }
-                      
-    //                 });
-                    
-    //             }
-    //         )
-    //         .catch(function(err) {
-    //             console.log('Fetch Error :-S', err);
-    //         });
-    //     }, 4000); 
-        
-    // //------willys animation-----------
-    // function myGreeting(state){
-    //         if(state){
-    //             document.getElementById("current-total").classList.add('celebrate');
-    //         }
-    //         else{
-    //             document.getElementById("current-total").classList.remove('celebrate');
-    //         }
-    //     }
-
-    //     function isInRange(prev, num) {
-    //         const array = [500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500]
-    //         return array.some((number) => {
-    //             return prev < number && num >= number
-    //         })
-    //     }
-    // //-----------gif animation--------------
-
-    // // function celebrate(state){
-    // //     if(state){
-    // //         document.getElementById("gif").style.display = 'block';
-    // //     }
-    // //     else{
-    // //         document.getElementById("gif").style.display = 'none';
-    // //     }
-
-    // // }
-
-    // // //Checks if the total has passed one of the array values
-    // // function isInRange(prev, num) {
-    // //     const numbers = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000]
-    // //     let reachedCelebrateLimit = false
-    // //     numbers.forEach((number) => {
-    // //         if(prev < number && num >= number){
-    // //             reachedCelebrateLimit = true
-    // //         }
-    // //     })
-    // //     return reachedCelebrateLimit
-    // // }
-
-
-    // // //test logic below to have a different gif appear for each milestone 
-    // // function changingGifs(prev, num){
-    // //     let gif = ""
-    // //     if(prev < 1000 && num >= 1000){
-    // //         gif = "https://c.tenor.com/wwcY7OhagdsAAAAj/bt21-koya.gif"
-    // //     } else if(prev < 2000 && num >= 2000){
-    // //         gif = "https://c.tenor.com/YHKdlpTduMQAAAAi/im-free-cute.gif"
-    // //     } else if(prev < 3000 && num >= 3000){
-    // //         gif = "https://c.tenor.com/_nYHwRRlGj0AAAAj/lol-bones.gif"
-    // //     } else if(prev < 4000 && num >= 4000){
-    // //         gif = "https://c.tenor.com/ZoZqWaSnN5UAAAAj/diwali-sparkles-stars.gif"
-    // //     } else if(prev < 5000 && num >= 5000){
-    // //         gif = "https://c.tenor.com/F8uKopL0WXwAAAAj/smiley-emoji.gif"
-    // //     } else if(prev < 6000 && num >= 6000){
-    // //         gif = "https://c.tenor.com/0iMt2783jPcAAAAj/dancing-happy.gif"
-    // //     } else if(prev < 7000 && num >= 7000){
-    // //         gif = "https://c.tenor.com/852LyEGZiD0AAAAj/musica-maracas.gif"
-    // //     } else if(prev < 8000 && num >= 8000){
-    // //         gif = "https://c.tenor.com/PxwQs_YEXHUAAAAj/banana-dance.gif"
-    // //     } else if(prev < 9000 && num >= 9000){
-    // //         gif = "https://c.tenor.com/jyTs_cgA1-8AAAAj/dancing-dancing-gif.gif"
-    // //     } else if(prev < 10000 && num == 10000){
-    // //         gif = "https://c.tenor.com/TLW6ZTXfxQgAAAAj/innovatetoday-dance.gif"
-    // //     } 
-    // //     document.getElementById("imgsrc").src=gif
-    // // }
-    // //.................
-    
 
     </script> 
 </html>
