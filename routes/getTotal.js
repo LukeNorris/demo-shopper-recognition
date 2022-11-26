@@ -7,7 +7,9 @@ const router = express.Router()
 
 const currentTotal = asyncHandler(async () => {
     try {
-        const id = "62977706e0fb3610357d6904"
+        //const id = "62977706e0fb3610357d6904"
+        //backup db id below
+        const id = "63822f6e91b8e5d989fb0250"
         const currentTotal = await Total.findById(id)
         if (currentTotal) {   
             return(currentTotal)
