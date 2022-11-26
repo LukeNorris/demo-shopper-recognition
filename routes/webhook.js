@@ -9,7 +9,9 @@ const router = express.Router()
 
 const updateTotal = asyncHandler(async (amount) => {
   try {
-      const id = "62977706e0fb3610357d6904"
+      //const id = "62977706e0fb3610357d6904"
+      //backup db id below
+      const id = "63822f6e91b8e5d989fb0250"
       let currentTotal = await Total.findById(id)
       let newTotal = currentTotal.total + amount
       if (newTotal > 10000 ) {
@@ -51,6 +53,17 @@ const addtotal = asyncHandler(async (req, res) => {
     }
 });
 
+
+// const addtotal = asyncHandler(async (req, res) => {    
+//   try {
+//     let newRecord = await Total.insertMany({total:0})
+      
+//     res.status(200).json(newRecord)
+//   } catch (err) {
+//     console.error(`Error: ${err.message}, error code: ${err.errorCode}`);
+//     res.status(err.statusCode).json(err.message);
+//   }
+// });
 
 
 router.post('/webhook', addtotal)
